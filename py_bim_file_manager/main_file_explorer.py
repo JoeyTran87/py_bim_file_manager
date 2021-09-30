@@ -100,12 +100,16 @@ class fileExplorer():
         print(f"""\tThành công ghi tập tin danh sách File tại: \n\t\t{self.jsonPathSorted}\n\t\t{self.jsonPathUnsort}\n\t\t{self.jsonPathFull}""")
         self.data = pd.read_json(self.jsonPathSorted)
         print(self.data.head(5))
-        
+    def browse_folder(self) -> str:
+        """Duyệt folder"""
+        dir_folder = input("\tFolder path: ")
+        folder_names = os.listdir(dir_folder)
 
+        [print(f"{folder_names[i]}") for i in range(len(folder_names))]
 if __name__ == "__main__":
     """"""
     manager = fileExplorer()
-    manager.start()
+    manager.browse_folder()
 
 
 

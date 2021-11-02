@@ -122,6 +122,9 @@ def main():
     \t1.\tXóa tập tin không cần thiết           1.1 Xóa các tập tin theo Extension tùy chỉnh
                                                 1.2 Xóa các tên file theo Bộ tìm kiếm Tên file
     \t2.\tSắp xếp tập tin                       
+    
+    """
+    """
     \t3.\tThiết lập chương trình                3.1 Thiết lập Bộ xóa file tự động
                                                 3.2 Thiết lập Bộ sắp xếp file tự động    
     \t4.\tTra cứu tập tin                       4.1 Tra cứu theo Xu hướng thông tin

@@ -1,0 +1,37 @@
+{
+    "ProjectName"           : "BIM Sample Project",
+    "ProjectUniqueId"       : "",
+
+    "FramingName"            : "",
+    "FramingGUID"            : "",
+    "FramingBaseLevel"       : "",
+    "FramingBaseLevelOffset" : "",
+    "FramingTopLevel"        : "",
+    "FramingTopLevelOffset"  : "",
+    "FramingType"            : "Shear Wall",
+    "FramingPosion"          : "0 0 0",
+    "FramingStartPoint"      : "0 0 0",
+    "FramingEndPoint"        : "0 0 0",
+
+    "FramingSize"            : "200 200",
+    "FramingSizeWidth"       : "200",
+    "FramingSizeHeight"      : "200",
+    "FramingBasePoint"       : "0 0 0",
+    "FramingPlacePoint_U"     : "0.5",
+    "FramingPlacePoint_V"     : "0.5",
+
+    "FramingLength"          : "4000",
+    "FramingVolume"          : "0.16",
+    "FramingSurfaceArea"     : "1.6",
+
+    "CreatedDate"           : "",
+    "LastUpdatedDate"       : "",    
+    "UpdatedDate"           : "",
+    "UpdatedBy"             : "",
+
+    "UnitLength"            : "Milimeter",
+    "UnitArea"              : "Square Meter",
+    "UnitVolume"            : "Cubic Meter",
+    "UnitAngle"             : "Degree",
+    "UnitSlope"             : "Percentage"
+}

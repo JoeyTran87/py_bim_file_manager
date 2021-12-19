@@ -1,0 +1,181 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="tree.css">
+  <title>{% block title %}{%endblock%}</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
+
+
+    <div class="container">
+      <h2 class="display-4">BIM REPORT / BÁO CÁO BIM</h2>
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#projinfo" data-toggle="tooltip" title="Click me!">
+        PROJECT INFORMATION / THÔNG TIN DỰ ÁN
+      </button>
+      <div id="projinfo" class="collapse show">
+        <div id="ProjectName">
+          Project Name / Tên Dự Án: CONG HOA GARDEN II
+        </div>  
+        <div id="ProjectCode">
+          Project Code / Mã Dự Án: CHG
+        </div> 
+      </div> 
+
+
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#siteinfo" data-toggle="tooltip" title="Click me!">
+        SITE INFORMATION / THÔNG TIN CÔNG TRƯỜNG
+      </button>
+      <div id="siteinfo" class="collapse show">
+        <div id="SiteLocation">
+          Site Location / Vị trí công trình: Cong Hoa Avenue, Tan Binh district, HCMC
+        </div>  
+        <div id="SiteLandArea">
+          Site Land Area / Diện tích đất công trình: 500 m2
+        </div> 
+        <div id="SiteLandPerimeter">
+          Site Land Perimeter / Chu vi đất công trình: 1000 m
+        </div> 
+        <div id="MainContractor">
+          Main Contractor / Nhà thầu chính: COFICO
+        </div> 
+      </div> 
+
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#bidinfo" data-toggle="tooltip" title="Click me!">
+        BID INFORMATION / THÔNG TIN ĐẤU THẦU
+      </button>
+      <div id="bidinfo" class="collapse show">
+        <div id="BidPackage">
+          Bid Package / Gói thầu: Main Contractor CSA, MEP
+        </div>  
+        <div id="BidStartDate">
+          Bid Start Date: 07/06/2021
+        </div> 
+        <div id="BidEndDate">
+          Bid End Date: 07/07/2021
+        </div> 
+        <div id="BidDuration">
+          Bid Duration: 30 days
+        </div> 
+      </div> 
+
+
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#dsninfo" data-toggle="tooltip" title="Click me!">
+        BUILDING DESIGN INFORMATION / THÔNG TIN THIẾT KẾ CÔNG TRÌNH
+      </button>
+      <div id="dsninfo" class="collapse show"> 
+        <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#archinfo" data-toggle="tooltip" title="Click me!">
+          ARCHITECTURAL DESIGN / THIẾT KẾ KIẾN TRÚC
+        </button>
+
+        <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#strucinfo" data-toggle="tooltip" title="Click me!">
+          STRUCTURAL DESIGN / THIẾT KẾ KẾT CẤU
+        </button>
+
+        <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#mepinfo" data-toggle="tooltip" title="Click me!">
+          MEP DESIGN / THIẾT KẾ CƠ ĐIỆN
+        </button>
+      </div>
+
+
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#consinfo" data-toggle="tooltip" title="Click me!">
+        CONSTRUCTION INFORMATION / THÔNG TIN THI CÔNG
+      </button>
+      <div id="consinfo" class="collapse show">
+        <div id="ConstructionStartDateEstimated">
+          Construction Start Date Estimated: 07/08/2021
+        </div>  
+        <div id="ConstructionEndDateEstimated">
+          Construction End Date Estimated: 07/08/2022
+        </div> 
+        <div id="ConstructionDuration">
+          Construction Duration: 12 months
+        </div> 
+        <div id="ConstructionEngineerCount">
+          Construction Engineer Count: 100 people
+        </div>  
+        <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#cminfo" data-toggle="tooltip" title="Click me!">
+          CONSTRUCTION METHOD STATEMENT / BIỆN PHÁP THI CÔNG
+        </button>
+        <div id="cminfo" class="collapse">
+          <div id="ConstructionTeamOrganizationChart">
+            Construction Team Organization Chart 
+            <img src="./Images/ConstructionTeamOC.jpg" alt="OC" class="img-fluid" >           
+          </div>           
+          <div id="TemporarySiteArrangement">
+            Temporary Site Arrangement: Mặt bằng thi công công trình được tổ chức: Hàng rào tạm bao quanh, có 2 Cổng tạm ra vào, Đường tạm bê tông cho xe vận tải, 2 khu văn phòng công trường cho Chủ đầu tư và Các nhà thầu, Bãi gia công thép, Ván khuôn, Bãi rác, Kho vật tư
+            <img src="./Images/TempSite.jpg" alt="TempSiteLayout" class="img-fluid" >
+          </div>           
+          <div id="TemporaryMEPArrangement">
+            Temporary MEP Arrangement : Bố trí tiện ích Cấp, Điện Nước (Cấp & Thoát), Chống sét, Camera an ninh
+          </div> 
+          <div id="ConstructionSafetyControl">
+            Construction Safety Control : NA
+          </div> 
+          <div id="ConstructionSchedule">
+            Construction Schedule : NA
+          </div> 
+          <div id="ConstructionHumanResourcePlan">
+            Construction Human Resource Plan
+            <img src="./Images/ConstructionHRplan.jpg" alt="HR" class="img-fluid" >
+          </div>  
+        </div> 
+
+        <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#qtoinfo" data-toggle="tooltip" title="Click me!">
+          QUANTITY TAKE OFF / THỐNG KÊ KHỐI LƯỢNG
+        </button>
+      </div>
+
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+{
+    "ProjectName"           : "BIM Sample Project",
+    "ProjectUniqueId"       : "",
+
+    "ColumnName"            : "",
+    "ColumnGUID"            : "",
+    "ColumnBaseLevel"       : "",
+    "ColumnBaseLevelOffset" : "",
+    "ColumnTopLevel"        : "",
+    "ColumnTopLevelOffset"  : "",
+    "ColumnType"            : "Shear Wall",
+    "ColumnPosion"          : "0 0 0",
+    "ColumnStartPoint"      : "0 0 0",
+    "ColumnEndPoint"        : "0 0 0",
+
+    "ColumnSize"            : "200 200",
+    "ColumnSizeWidth"       : "200",
+    "ColumnSizeHeight"      : "200",
+    "ColumnBasePoint"       : "0 0 0",
+    "ColumnPlacePoint_U"     : "0.5",
+    "ColumnPlacePoint_V"     : "0.5",
+
+    "ColumnLength"          : "4000",
+    "ColumnVolume"          : "0.16",
+    "ColumnSurfaceArea"     : "1.6",
+
+    "CreatedDate"           : "",
+    "LastUpdatedDate"       : "",    
+    "UpdatedDate"           : "",
+    "UpdatedBy"             : "",
+
+    "UnitLength"            : "Milimeter",
+    "UnitArea"              : "Square Meter",
+    "UnitVolume"            : "Cubic Meter",
+    "UnitAngle"             : "Degree",
+    "UnitSlope"             : "Percentage"
+}

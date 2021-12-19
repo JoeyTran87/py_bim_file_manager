@@ -1,0 +1,18 @@
+
+    {
+        "ProjectName": "BIM Sample Project",
+        "ProjectUniqueId": "",
+
+        "CreatedDate": "",
+        "LastUpdatedDate": "",    
+        "UpdatedDate": "",
+        "UpdatedBy": "",
+        "Author" : "tvpduy"    ,
+
+        "FoundationTypes":["Slab Foundation","Span Foundation","Isolated Foundation","Wall Foundation"],
+        "FoundationTypeAbreviation":["SLFD","SPFD","ISFD","WAFD"],
+        "ColumnTypes":["Structural Column","Structural Shear Wall","Architectural Column"],
+        "ColumnTypeAbreviation":["SCL","SSW","ACL"],
+        "FramingTypes":["Foundation Beam","Ground Beam","Beam","Lintel","Brace","Scaffolding Brace","Truss","Purlin"],
+        "FramingTypeAbreviation":["FBM","GBM","SBM","LT","SBR","SCBR","STS","SPL"]
+    }

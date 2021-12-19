@@ -1,0 +1,16 @@
+{
+    "ProjectName": "BIM Sample Project",
+    "ProjectUniqueId": "",
+    "BuildingName": "",
+    "BuildingScale": "",
+    "BuildingLocation": "",
+    "BuildingBoundingZone": "-18000 -74000 -18000 105000 116000 105000 116000 -74000",
+    "BuildingBoundingBox": "",
+    "BuildingLandArea": "",
+    "BuildingLandBoundary": "0 0 1 1 1 0",
+    "CreatedDate": "",
+    "LastUpdatedDate": "",
+    "UpdatedDate": "",
+    "UpdatedBy": "",
+    "Author": "tvpduy"
+}

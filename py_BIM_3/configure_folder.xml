@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>    
+    <configure>
+        <ip>172.16.2.29</ip>
+        <domain>hcmcfcfs01</domain>
+        <project_root>R:\BimESC\01_PROJECTS</project_root>
+        <project_root_ip>\\172.16.2.29\\databim$\BimESC\01_PROJECTS</project_root_ip>
+        <project_root_domain>\\hcmcfcfs01\databim$\BimESC\01_PROJECTS</project_root_domain>
+    </configure>
+</root>

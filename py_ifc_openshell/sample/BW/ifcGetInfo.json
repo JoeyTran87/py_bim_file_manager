@@ -1,0 +1,50 @@
+[
+    {
+        "GlobalId": "2GhEgR5uDCbewP1j4juKXC",
+        "Type": "IfcElementAssembly",
+        "Tag": "01032115",
+        "Name": "Steel Assembly",
+        "MATERIAL_TYPE": "STEEL",
+        "WEIGHT": 17.07073,
+        "LENGTH": 3474.99911,
+        "GUID": "ID90ACEA9B-1783-4C96-8E99-06D12DE1484C",
+        "ASSEMBLY_TOP_LEVEL": " +2.260",
+        "ASSEMBLY_POSITION_CODE": "X14-X15/Y15/+0.00-+3.500",
+        "ASSEMBLY_POS": "01032115",
+        "ASSEMBLY_NAME": "RHS100x50x2",
+        "ASSEMBLY_BOTTOM_LEVEL": " +2.190",
+        "AREA": 1.05708
+    },
+    {
+        "GlobalId": "20kly8l39EKOr69z2WVRRx",
+        "Type": "IfcElementAssembly",
+        "Tag": "01171902",
+        "Name": "Steel Assembly",
+        "MATERIAL_TYPE": "STEEL",
+        "WEIGHT": 0.58875,
+        "LENGTH": 150.0,
+        "GUID": "ID80BAFF08-BC32-4E51-8D46-27D0A07DB6FB",
+        "ASSEMBLY_TOP_LEVEL": " +3.021",
+        "ASSEMBLY_POSITION_CODE": "X1/Y11-Y12/+3.500",
+        "ASSEMBLY_POS": "01171902",
+        "ASSEMBLY_NAME": "CLIP",
+        "ASSEMBLY_BOTTOM_LEVEL": " +3.016",
+        "AREA": 0.0325
+    },
+    {
+        "GlobalId": "34FbOI9914M8_hiKYutpXs",
+        "Type": "IfcElementAssembly",
+        "Tag": "01032102",
+        "Name": "Steel Assembly",
+        "MATERIAL_TYPE": "STEEL",
+        "WEIGHT": 11.84681,
+        "LENGTH": 2403.99237,
+        "GUID": "IDC43E5612-2490-4458-8FAB-B148B8DF3876",
+        "ASSEMBLY_TOP_LEVEL": " +3.050",
+        "ASSEMBLY_POSITION_CODE": "X1/Y11-Y12/+3.500",
+        "ASSEMBLY_POS": "01032102",
+        "ASSEMBLY_NAME": "RHS100x50x2",
+        "ASSEMBLY_BOTTOM_LEVEL": " +3.000",
+        "AREA": 0.72701
+    }
+]

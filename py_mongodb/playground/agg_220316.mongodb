@@ -1,0 +1,115 @@
+use('b4pez');
+
+// Data Plan
+// db.StoragePlans.aggregate([
+//     { $project:{_id:0 ,
+//                 LocationId:1 ,
+//                 StorageElementCode: 1, 
+//                 StorageElementName:1 ,
+//                 StorageElementUnitText:1 ,
+//                 Amount:1 ,
+//                 StoragePlanPaperId:1 ,
+//                 }},
+//     {$lookup: {from: 'StorageLocations',
+//                 let: { loc_ID: "$LocationId" },
+//                 pipeline: [{ $project: {locID:{$toString: "$_id"} ,
+//                                         _id:0,
+//                                         AbbreviationName:1,
+//                                         ProjectName:1,
+//                                         }},
+//                             { $match: {$expr: { $eq: ["$$loc_ID","$locID"] } } }
+//                           ] ,
+//                 as: 'Location'
+//               }},
+//     {$unwind:{path: "$Location",} },
+//     { $project:{_id:0 ,
+//                 StorageElementCode: 1,
+//                 StorageElementName:1 ,
+//                 StorageElementUnitText:1 ,
+//                 Amount:1 ,
+//                 ProjectNumber: "$Location.AbbreviationName" ,
+//                 ProjectName: "$Location.ProjectName" ,         
+//                 }},
+//   ]
+// )
+
+// Data Req Approve
+db.StorageRequisitionApprovements.aggregate([
+    { $project:{_id:0 ,
+                LocationId:1 ,
+                StorageElementCode: 1, 
+                StorageElementName:1 ,
+                StorageElementUnitText:1 ,
+                Amount:1 ,
+                StorageRequisitionPaperId:1 ,
+                SupplierName:1 ,
+                ExpectationSupplyDate:1 ,
+                ExpectationReturnDate:1 ,
+                StorageElementId:1 ,
+                }},
+    {$lookup: {from: 'StorageLocations',
+                let: { loc_ID: "$LocationId" },
+                pipeline: [{ $project: {locID:{$toString: "$_id"} ,
+                                        _id:0,
+                                        AbbreviationName:1,
+                                        ProjectName:1,
+                                        }},
+                            { $match: {$expr: { $eq: ["$$loc_ID","$locID"] } } }
+                          ] ,
+                as: 'Location'
+              }},
+    {$unwind:{path: "$Location",} },
+
+    {$lookup: {from: 'StorageRequisitionPapers',
+                let: { paper_ID: "$StorageRequisitionPaperId" },
+                pipeline: [{ $project: {paperID:{$toString: "$_id"} ,
+                                        _id:0,
+                                        PaperNumber:1,
+                                        }},
+                            { $match: {$expr: { $eq: ["$$paper_ID","$paperID"] } } }
+                          ] ,
+                as: 'Paper'
+              }},
+
+    {$unwind:{path: "$Paper",} },
+
+    {$lookup: {from: 'StoragePlans',
+                let: { storage_ID: "$StorageElementId" },
+                pipeline: [{ $project: {
+                                        _id:0,
+                                        StorageElementId:1,
+                                        Amount:1,
+                                        }},
+                            { $match: {$expr: { $eq: ["$$storage_ID","$StorageElementId"] } } }
+                          ] ,
+                as: 'Plan'
+              }},
+
+    {$unwind:{path: "$Plan",} },
+
+    { $project:{_id:0 ,
+                StorageElementCode: 1,
+                StorageElementName:1 ,
+                StorageElementUnitText:1 ,
+                ApproveAmount: "$Amount" ,
+                SupplierName:1 ,
+                ExpectationSupplyDate:1 ,
+                ExpectationReturnDate:1 ,
+                ProjectNumber: "$Location.AbbreviationName" ,
+                ProjectName: "$Location.ProjectName" ,         
+                PaperNumber: "$Paper.PaperNumber" ,         
+                PlanAmount: "$Plan.Amount" ,
+                }},
+  ]
+)
+
+
+// Data Location
+// db.StorageLocations.aggregate(
+//   [
+//     { $project:{_id:{$toString: "$_id"} ,
+//                 AbbreviationName:1,
+//                 ProjectName:1,
+//                 }},
+//   ]
+// )

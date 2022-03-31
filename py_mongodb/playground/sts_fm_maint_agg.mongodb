@@ -1,0 +1,42 @@
+use('cofico');
+
+
+// Du lieu VTTB duoc Plan va Duyet cap
+const agg = 
+[
+    { $project:{
+                _id: 0 ,//{$toString:"$_id"} ,
+                folderId: { $ifNull: [ "$folderId", "nonid", {$toString:"$_id"} ] }, // ,
+              },
+    }
+]
+
+const projection = {
+  _id: 1 ,//{$toString:"$_id"} ,
+  // folderId: 1//{ $ifNull: [ "$folderId", "nonid", {$toString:"$_id"} ] }, // ,              
+}
+const agg1 = 
+[
+    { $project:{
+                imageModels: 0 ,
+                solvedImageModels: 0 ,
+              },
+    }
+]
+
+const agg2 = [
+  { $project:{
+              _id: 0 ,//{$toString:"$_id"} ,
+              folderId: { $ifNull: [ "$folderId", undefined, {$toString:"$folderId"} ] }, // ,
+            },
+  },
+  {
+    $group: { _id: "$folderId", totalQuantity: { $count: { } } }   
+  },
+  // { $sort: { folderId: -1 } },
+]
+
+db.facilityManualReport.aggregate(agg2)
+
+
+// db.facilityManualReport.find({})

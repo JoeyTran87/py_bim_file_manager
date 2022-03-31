@@ -1,0 +1,281 @@
+
+use('cofico');
+
+
+// Du lieu VTTB duoc Plan va Duyet cap
+db.facilityManualReport.aggregate(
+  [
+    { $project:{
+                _id: 1 ,
+                folderId: 1,//{ $ifNull: [ "$folderId", "", {$toString:"$folderId"} ] },
+                createDate: {
+                                $cond: [
+                                            { $eq: [ "$createDate", {$dateFromString : {dateString: "0001-01-01T00:00:00.000Z"} } ] },
+                                            undefined, 
+                                            { $toString:"$createDate"}
+                                        ] ,
+                            },
+                rejectedDate: {
+                                $cond: [
+                                            { $eq: [ "$rejectedDate", {$dateFromString : {dateString: "0001-01-01T00:00:00.000Z"} } ] },
+                                            undefined, 
+                                            { $toString:"$rejectedDate"}
+                                        ] ,
+                            },
+                classifiedDate: {
+                                    $cond: [
+                                                { $eq: [ "$classifiedDate", {$dateFromString : {dateString: "0001-01-01T00:00:00.000Z"} } ] },
+                                                undefined, 
+                                                { $toString:"$classifiedDate"}
+                                            ] ,
+                                },
+                receivedDate: {
+                                $cond: [
+                                            { $eq: [ "$receivedDate", {$dateFromString : {dateString: "0001-01-01T00:00:00.000Z"} } ] },
+                                            undefined, 
+                                            { $toString:"$receivedDate"}
+                                        ] ,
+                            },
+                pendingDate: {
+                                $cond: [
+                                            { $eq: [ "$pendingDate", {$dateFromString : {dateString: "0001-01-01T00:00:00.000Z"} } ] },
+                                            undefined, 
+                                            { $toString:"$pendingDate"}
+                                        ] ,
+                            },
+                solvedDate: {
+                                $cond: [
+                                            { $eq: [ "$solvedDate", {$dateFromString : {dateString: "0001-01-01T00:00:00.000Z"} } ] },
+                                            undefined, 
+                                            { $toString:"$solvedDate"}
+                                        ] ,
+                            },
+                expectedCompletionDate: {
+                                        $cond: [
+                                                    { $eq: [ "$expectedCompletionDate", {$dateFromString : {dateString: "0001-01-01T00:00:00.000Z"} } ] },
+                                                    undefined, 
+                                                    { $toString:"$expectedCompletionDate"}
+                                                ] ,
+                                    },
+                expectedFixingDate: {
+                                        $cond: [
+                                                    { $eq: [ "$expectedFixingDate", {$dateFromString : {dateString: "0001-01-01T00:00:00.000Z"} } ] },
+                                                    undefined, 
+                                                    { $toString:"$expectedFixingDate"}
+                                                ] ,
+                                    },
+                lastUpdated: {
+                                $cond: [
+                                            { $eq: [ "$lastUpdated", {$dateFromString : {dateString: "0001-01-01T00:00:00.000Z"} } ] },
+                                            undefined, 
+                                            { $toString:"$lastUpdated"}
+                                        ] ,
+                            },
+                locationId: 1,
+                issueTitle: 1,
+                description: 1,
+                createByUser: 1,
+                isRejected:1,
+                note: 1,
+                rootCause: 1,
+                solution: 1,
+                isSolved: 1,
+                onPending: 1,
+                isReceived: 1,
+                reportTypeId: 1,
+                importantRate: 1,
+                isClassified: 1,
+                reportTypeId: 1,
+              },
+    },
+    // {$lookup: { from: 'facilityRoom',
+    //             let: { location_id: "$locationId" },
+    //             pipeline: [{ $project: {_id: {$toString: "$_id"} ,
+    //                                         roomName:1,
+    //                                         levelId:1,
+    //                                       }},
+    //                         { $match: {$expr: { $eq: ["$$location_id","$_id"] } } }
+    //                       ] ,
+    //             as: 'facilityRoom'
+    //           }},
+    {$lookup: { from: 'facilityRoom',
+                let: { location_id: "$locationId" },
+                pipeline: [{ $project: {_id: {$toString: "$_id"} ,
+                                            roomName:1,
+                                            levelId:1,
+                                          }},
+                            { $match: {$expr: { $eq: ["$$location_id","$_id"] } } }
+                          ] ,
+                as: 'facilityRoom'
+              }},
+    {$unwind:{path: "$facilityRoom",} },
+    // { $project:{
+    //             _id: 1 ,
+    //             folderId: 1,
+    //             createDate: 1,
+    //             rejectedDate: 1,
+    //             classifiedDate: 1,
+    //             receivedDate: 1,
+    //             pendingDate: 1,
+    //             solvedDate: 1,
+    //             expectedCompletionDate: 1,
+    //             expectedFixingDate: 1,
+    //             lastUpdated: 1,
+    //             locationId: 1,
+    //             issueTitle: 1,
+    //             description: 1,
+    //             createByUser: 1,
+    //             isRejected:1,
+    //             note: 1,
+    //             rootCause: 1,
+    //             solution: 1,
+    //             isSolved: 1,
+    //             onPending: 1,
+    //             isReceived: 1,
+    //             reportTypeId: 1,
+    //             importantRate: 1,
+    //             isClassified: 1,
+    //             reportTypeId: 1,
+    //             roomName: "$facilityRoom.roomName",
+    //             levelId: "$facilityRoom.levelId",
+    //           },
+    // },
+    // {$lookup: {from: 'facilityLevel',
+    //                           let: { level_Id: "$levelId" },
+    //                           pipeline: [{ $project: {_id: {$toString: "$_id"} ,
+    //                                                   levelName:1,
+    //                                                   }},
+    //                                       { $match: {$expr: { $eq: ["$$level_Id","$_id"] } } }
+    //                                     ] ,
+    //                           as: 'facilityLevel'
+    //                         }},
+    // {$unwind:{path: "$facilityLevel",} },
+    // { $project:{
+    //             _id: 1 ,
+    //             folderId: 1,
+    //             createDate: 1,
+    //             rejectedDate: 1,
+    //             classifiedDate: 1,
+    //             receivedDate: 1,
+    //             pendingDate: 1,
+    //             solvedDate: 1,
+    //             expectedCompletionDate: 1,
+    //             expectedFixingDate: 1,
+    //             lastUpdated: 1,
+    //             locationId: 1,
+    //             issueTitle: 1,
+    //             description: 1,
+    //             createByUser: 1,
+    //             isRejected:1,
+    //             note: 1,
+    //             rootCause: 1,
+    //             solution: 1,
+    //             isSolved: 1,
+    //             onPending: 1,
+    //             isReceived: 1,
+    //             reportTypeId: 1,
+    //             importantRate: 1,
+    //             isClassified: 1,
+    //             reportTypeId: 1,
+    //             roomName: 1,
+    //             levelId: 1,
+    //             levelName: "$facilityLevel.levelName",
+    //           },
+    // },
+    // {$lookup: {from: 'facilityManualReportType',
+    //                           let: { reportType_Id: "$reportTypeId" },
+    //                           pipeline: [{ $project: {_id: {$toString: "$_id"} ,
+    //                                                   reportTypeName:1,
+    //                                                   }},
+    //                                       { $match: {$expr: { $eq: ["$$reportType_Id","$_id"] } } }
+    //                                     ] ,
+    //                           as: 'facilityManualReportType'
+    //                         }},
+    // {$unwind:{path: "$facilityManualReportType",} },
+    // { $project:{
+    //             _id: 1 ,
+    //             folderId: 1,
+    //             createDate: 1,
+    //             rejectedDate: 1,
+    //             classifiedDate: 1,
+    //             receivedDate: 1,
+    //             pendingDate: 1,
+    //             solvedDate: 1,
+    //             expectedCompletionDate: 1,
+    //             expectedFixingDate: 1,
+    //             lastUpdated: 1,
+    //             locationId: 1,
+    //             issueTitle: 1,
+    //             description: 1,
+    //             createByUser: 1,
+    //             isRejected:1,
+    //             note: 1,
+    //             rootCause: 1,
+    //             solution: 1,
+    //             isSolved: 1,
+    //             onPending: 1,
+    //             isReceived: 1,
+    //             reportTypeId: 1,
+    //             importantRate: 1,
+    //             isClassified: 1,
+    //             reportTypeId: 1,
+    //             roomName: 1,
+    //             levelId: 1,
+    //             levelName: 1,
+    //             reportTypeName: "$facilityManualReportType.reportTypeName",
+    //           },
+    // },
+    // {$lookup: {from: 'folderTree',
+    //                           let: { folder_Id: "$folderId" },
+    //                           pipeline: [{ $project: {_id: {$toString: "$_id"} ,
+    //                                                   text:1,
+    //                                                   }},
+    //                                       { $match: {$expr: { $eq: ["$$folder_Id","$_id"] } } }
+    //                                     ] ,
+    //                           as: 'folderTree'
+    //                         }},
+    // {$unwind:{path: "$folderTree",} },
+
+    // { $project:
+    //   {
+    //           _id: 1,//{$toString:"$_id"} ,
+    //           folderId: 1,
+    //           createDate: 1,
+    //           rejectedDate: 1,
+    //           classifiedDate: 1,
+    //           receivedDate: 1,
+    //           pendingDate: 1,
+    //           solvedDate: 1,
+    //           expectedCompletionDate: 1,
+    //           expectedFixingDate: 1,
+    //           lastUpdated: 1,
+    //           locationId: 1,
+    //           issueTitle: 1,
+    //           description: 1,
+    //           createByUser: 1,
+    //           isRejected:1,
+    //           note: 1,
+    //           rootCause: 1,
+    //           solution: 1,
+    //           isSolved: 1,
+    //           onPending: 1,
+    //           isReceived: 1,
+    //           reportTypeId: 1,
+    //           importantRate: 1,
+    //           isClassified: 1,
+    //           reportTypeId: 1,
+    //           roomName: 1,
+    //           levelId: 1,
+    //           levelName: 1,
+    //           reportTypeName: 1,
+    //           folderName: "$folderTree.text",
+    //         },
+    // },   
+
+    {
+      $group: { _id: "$folderId", totalQuantity: { $count: { } } }   
+    }, 
+
+    { $sort: {createDate:1}}
+  ]
+)

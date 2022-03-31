@@ -193,17 +193,45 @@ try:
         indent = "-"*4
         db_v1_path = "mongodb+srv://coficoviewer:YEDbSU2Y2LAN3XBT@cluster0.amf85.mongodb.net/cofico?retryWrites=true&w=majority"
         db_v2_path = "mongodb+srv://tvpduy:l2MYl6FG0DxVgx2U@ezweb.sryaz.gcp.mongodb.net/b4pez?retryWrites=true&w=majority"
+        
+        db_v1_host = "cluster0-shard-00-00.amf85.mongodb.net"
+        db_v1_port = 27017
+        db_v1_db_name = "cofico"
+        v1_username = "coficoviewer"
+        v1_password = "YEDbSU2Y2LAN3XBT"
+
+        db_v2_host = "ezweb-shard-00-00.sryaz.gcp.mongodb.net"
+        db_v2_port = 27017
+        db_v2_db_name= "b4pez"
+        v2_username = "tvpduy"
+        v2_password = "l2MYl6FG0DxVgx2U"
+        
+        # try:
+        #     # The ismaster command is cheap and does not require auth.
+        #     maxSevSelDelay = 5000 # Assume 1ms maximum server selection delay
+        #     # my_Client = pymongo.MongoClient(db_v1_path,serverSelectionTimeoutMS=maxSevSelDelay)
+        #     my_Client = pymongo.MongoClient(host = db_v1_host,port = db_v1_port)
+        #     # print(my_Client.server_info())
+        #     # my_Client.admin.command('ismaster')
+        #     my_Client.test.authenticate( v1_username , v1_password)
+        #     mydb = my_Client[db_v1_db_name]
+        # except ConnectionFailure:
+        #     print("Server not available")
 
         bimez_vers = ["BIM ez Verion 1-Author: htphong","BIM ez Version 2-Author: luvo"]
         [print(bimez_vers.index(ez)," : ",ez) for ez in bimez_vers]
         while True:
-            ask_ez = input(f"{indent}Vui lòng chọn Số hiệu Version BIM EZ Database: ")
-            if ask_ez == "0":
-                my_Client = pymongo.MongoClient(db_v1_path)
-                break
-            if ask_ez == "1":
-                my_Client = pymongo.MongoClient(db_v2_path)
-                break
+            try:
+                ask_ez = input(f"{indent}Vui lòng chọn Số hiệu Version BIM EZ Database: ")
+                if ask_ez == "0":
+                    my_Client = pymongo.MongoClient(db_v1_path)
+                    break
+                if ask_ez == "1":
+                    my_Client = pymongo.MongoClient(db_v2_path)
+                    break
+            except Exception as ex:
+                print(ex)
+                pass
         try:
             # The ping command is cheap and does not require auth.
             my_Client.admin.command('ping')

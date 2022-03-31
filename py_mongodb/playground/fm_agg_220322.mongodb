@@ -1,0 +1,35 @@
+use('cofico');
+
+// Du lieu VTTB duoc Plan va Duyet cap
+db.facilityManualReport.aggregate(
+  [
+    { $project:{
+                _id: {$toString:"$_id"} ,
+                createDate: {$toString:"$createDate"},
+                rejectedDate: {$toString:"$rejectedDate"},
+                classifiedDate: {$toString:"$classifiedDate"},
+                receivedDate: {$toString:"$receivedDate"},
+                pendingDate: {$toString:"$pendingDate"},
+                solvedDate: {$toString:"$solvedDate"},
+                expectedCompletionDate: {$toString:"$createDate"},
+                expectedFixingDate: {$toString:"$createDate"},
+                lastUpdated: {$toString:"$createDate"},
+                locationId: 1,
+                issueTitle: 1,
+                description: 1,
+                createByUser: 1,
+                isRejected:1,
+                note: 1,
+                rootCause: 1,
+                solution: 1,
+                isSolved: 1,
+                onPending: 1,
+                isReceived: 1,
+                reportTypeId: 1,
+                importantRate: 1,
+                isClassified: 1,
+              },
+    },
+    { $sort: {createDate:1}}
+  ]
+)

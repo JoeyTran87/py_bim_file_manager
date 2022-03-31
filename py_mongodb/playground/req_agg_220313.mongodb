@@ -1,0 +1,94 @@
+
+use('b4pez');
+// Run a find command to view items sold on April 4th, 2014.
+// db.StorageRequisitions.find();
+
+// aggregation 
+const agg1 = [
+    { $match: { StorageRequisitionPaperId : {$in:['616ce9ced916cdc958a1d541','616cf034312938f3936ae46f'] } } },
+    { $group: { _id: '$StorageElementName', 
+                totalPlan: { $sum: "$StoragePlanAmount"},
+                totalReq: { $sum: "$RequestedAmount"}
+            } },
+    {$sort: { totalPlan: -1} }
+];
+//
+//
+const agg2 = [
+    {$project: {"_id":1 ,"StorageRequisitionPaperId":1} }
+]
+//
+//
+const agg3 = [
+    { $match: {} },
+    { $lookup: {
+      from: 'StorageRequisitionPapers',
+      localField: 'StorageRequisitionPaperId.str',
+      foreignField: '_id.str',
+      as: 'Papers'
+    }},
+    // { $lookup: {
+    //   from: 'StorageLocations',
+    //   localField: '_id.str',
+    //   foreignField: 'Papers.LocationId',
+    //   as: 'LocationName'
+    // }},   
+        
+    // { $addFields: {
+    //   newField: '$LocationName.ProjectName'
+    // }}
+    {
+    $project: { _id: 1, paperId: { $objectToArray: "$Papers.PaperNumber" } } }
+]
+// db.StorageRequisitions.aggregate(agg1);
+// db.StorageRequisitions.aggregate(agg2);
+// db.StorageRequisitions.aggregate(agg3);
+
+//count
+// db.StorageRequisitions.count({StorageRequisitionPaperId:'616ce9ced916cdc958a1d541'})
+
+//distinct
+// db.StorageRequisitions.distinct("StorageRequisitionPaperId")
+
+
+//union all
+// db.StorageRequisitions.aggregate([
+//    { $project: { _id: 0 ,
+                
+//                 // StorageElementCode:1,
+//                 // StorageElementName:1,
+//                 // StorageElementUnitText:1,
+//                 StorageRequisitionPaperId:1
+//                 } }
+// ])
+
+db.StorageRequisitions.aggregate([    
+    { $match: {} },
+    { $project: { 
+        _id:  { $toString: "$_id"},
+        StorageRequisitionPaperId: 1,
+        StorageElementId: 1,
+        StorageElementName: 1,
+        StorageElementUnitText: 1,
+        RequestedAmount: 1,
+        StoragePlanAmount: 1 } }    
+])
+
+db.StorageRequisitionPapers.aggregate([
+    { $match: { } },
+    { $project: { 
+        _id: { $toString: "$_id"},
+        PaperNumber:1,
+        LocationId:1,
+        LocationName:1
+    } }
+])
+
+db.StorageRequisitions.aggregate([    
+    { $lookup: {
+      from: 'StorageRequisitionPapers',
+      let: { usersIds: { $toString: "$_id"} },
+      localField: 'StorageRequisitionPaperId',
+      foreignField: '_id',
+      as: 'Papers' } }
+])

@@ -1,0 +1,123 @@
+use('b4pez');
+
+// Du lieu VTTB duoc Plan va Duyet cap
+db.StoragePlans.aggregate(
+  [
+    { $project:{
+                _id:0,//{$toString:"$_id"} ,
+                LocationId:1 ,
+                StorageElementCode: 1, 
+                StorageElementName:1 ,
+                StorageElementUnitText:1 ,
+                AmountPlan:"$Amount" ,
+                StorageElementId:1 ,
+                StoragePlanPaperId:1 ,
+              },
+    },
+    // lookup Plan được duyệt
+    {$lookup: {from: 'StoragePlanPapers',
+                let: { plan_paper_id: "$StoragePlanPaperId" },
+                pipeline: [{ $project: {_id: {$toString: "$_id"} ,
+                                        Status:1,
+                                        ActiveAt:1,
+                                        }},
+                            { $match: {$expr: { $eq: ["$$plan_paper_id","$_id"] } } }
+                          ] ,
+                as: 'StoragePlanPapers'
+              }},
+    {$unwind:{path: "$StoragePlanPapers",} },
+    { $project:{
+                _id:0,//{$toString:"$_id"} ,
+                LocationId:1 ,
+                StorageElementCode: 1, 
+                StorageElementName:1 ,
+                StorageElementUnitText:1 ,
+                AmountPlan:1 ,
+                StorageElementId:1 ,
+                StoragePlanPaperId:1 ,
+                PlanStatus: "$StoragePlanPapers.Status",
+                PlanActiveDate: { $toString: "$StoragePlanPapers.ActiveAt"},
+              },
+    },
+    //
+    { $match: { PlanStatus: 40 } },
+    //
+    // lookup thông tin dự án
+    {$lookup: {from: 'StorageLocations',
+                let: { location_id: "$LocationId" },
+                pipeline: [{ $project: {_id: {$toString: "$_id"} ,
+                                        ProjectName:1,
+                                        AbbreviationName:1,
+                                        Location:1,
+                                        }},
+                            { $match: {$expr: { $eq: ["$$location_id","$_id"] } } }
+                          ] ,
+                as: 'StorageLocations'
+              }},
+    {$unwind:{path: "$StorageLocations",} },
+    { $project:{
+                _id:0,//{$toString:"$_id"} ,
+                LocationId:1 ,
+                StorageElementCode: 1, 
+                StorageElementName:1 ,
+                StorageElementUnitText:1 ,
+                AmountPlan:1 ,
+                StorageElementId:1 ,
+                StoragePlanPaperId:1 ,
+                PlanStatus: 1,
+                PlanActiveDate: 1,
+                ProjectName: "$StorageLocations.ProjectName",
+                ProjectNumber: "$StorageLocations.AbbreviationName",
+                ProjectLocation: "$StorageLocations.Location",
+              },
+    },
+    // lookup VTTB được duyệt từ PYC
+    {$lookup: {from: 'StorageRequisitionApprovements',
+                let: { 
+                      loc_id: "$LocationId" ,
+                      elem_id: "$StorageElementId" ,
+                },
+                pipeline: [{ $project: {_id:0,//{$toString: "$_id"} ,
+                                        StorageElementId:1,
+                                        LocationId:1,
+                                        Amount:1,
+                                        SupplierName:1,
+                                        ExpectationSupplyDate:{$toString:"$ExpectationSupplyDate"},
+                                        ExpectationReturnDate:{$toString:"$ExpectationReturnDate"},
+                                        }},
+                            { $match: {$expr: { $and: [
+                                                        {$eq: ["$$loc_id","$LocationId"] },
+                                                        {$eq: ["$$elem_id","$StorageElementId"] },
+                                                      ]
+                                              }    
+                                      } 
+                            }
+                          ] ,
+                as: 'StorageRequisitionApprovements'
+              }},
+    {$unwind:{path: "$StorageRequisitionApprovements",} },
+    { $project:{
+                _id:0,//{$toString:"$_id"} ,
+                LocationId:1 ,
+                StorageElementCode: 1, 
+                StorageElementName:1 ,
+                StorageElementUnitText:1 ,
+                AmountPlan:1 ,
+                StorageElementId:1 ,
+                StoragePlanPaperId:1 ,
+                PlanStatus: 1,
+                PlanActiveDate: 1,
+                ProjectName: 1,
+                ProjectNumber: 1,
+                ProjectLocation: 1,
+                AmountApprove:"$StorageRequisitionApprovements.Amount" ,
+                ExpectationSupplyDate:"$StorageRequisitionApprovements.ExpectationSupplyDate" ,
+                ExpectationReturnDate:"$StorageRequisitionApprovements.ExpectationReturnDate" ,
+                SupplierName:"$StorageRequisitionApprovements.SupplierName" ,
+              },
+    },
+
+    { $sort: {AmountApprove:-1}}
+
+  ]
+)
